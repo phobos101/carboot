@@ -1,11 +1,19 @@
-<div class="row">
-  <div class="large-12 colums">
-    <h2 class="text-center">Upload a new Item</h2><br>
+<% if current_user %>
+  <div class="row">
+    <div class="large-12 colums">
+      <h2 class="text-center">Upload a new Item</h2><br>
+    </div>
   </div>
-</div>
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<div class="row">
-  <p class="text-center"><%= link_to 'Back', items_path %></p>
-</div>
+  <div class="row">
+    <p class="text-center"><%= link_to 'Back', items_path %></p>
+  </div>
+  <% else %>
+    <div class="row">
+      <div class="large-12 colums">
+        <h2 class="text-center">You must log in to see this page!</h2><br>
+      </div>
+    </div>
+  <% end %>
