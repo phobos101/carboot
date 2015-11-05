@@ -6,7 +6,7 @@
 
   <% @items.each do |item| %>
     <div class="large-4 small-6 columns">
-      <%=  link_to (image_tag item.image, size: '300'), item_path(item) %>
+      <%=  link_to (image_tag item.image, class:"image-sizer"), item_path(item) %>
       <div class="panel mobile-tile-item">
         <p><%= link_to item.name, item_path(item) %></p>
       </div>
