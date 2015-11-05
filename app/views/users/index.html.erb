@@ -1,0 +1,7 @@
+<h1>All users</h1>
+
+<% n = 1 %>
+<% @users.each do |user| %>
+  <%= n %>. <%= link_to user.username, "/users/#{user.id}" %> <br />
+  <% n +=1 %>
+<% end %>

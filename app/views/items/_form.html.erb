@@ -1,0 +1,54 @@
+<%= form_for @item, html: { multipart: true } do |f| %>
+  <% if @item.errors.any? %>
+    <div class="row">
+      <div class="large-6 columns large-offset-3">
+        <div id="error_explanation panel" class="panel">
+          <h4><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h4>
+
+          <ul>
+          <% @item.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="field">
+      <%= f.text_field :name, placeholder: "Item Name" %>
+    </div>
+    <div class="field">
+      <%= f.text_field :description, placeholder: "Description" %>
+    </div>
+    <div class="field">
+      <%= f.text_field :condition, placeholder: "Condition (new, like new, used, damaged)" %>
+    </div>
+    <div class="field">
+      <%= f.number_field :value, placeholder: "Suggested value in GBP" %>
+    </div>
+
+    <div class="field">
+      <%= f.collection_select :category_id, Category.order(:name), :id, :name %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-6 columns large-offset-3">
+      <div class="field">
+        <%= f.label :Image_upload %>
+        <%= f.file_field :image %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-6 columns large-offset-3">
+      <div class="actions">
+        <%= f.submit "Upload new Item", class:"alert button expand" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

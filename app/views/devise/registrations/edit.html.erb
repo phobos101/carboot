@@ -1,0 +1,122 @@
+<div class="row">
+  <div class="large-12 colums">
+    <h2 class="text-center">Edit your Profile</h2><br>
+  </div>
+</div>
+
+<div class="row">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="large-6 columns">
+      <label>
+        <%= f.text_field :username, autofocus: true, placeholder: "Username" %>
+      </label>
+    </div>
+
+    <div class="large-6 columns">
+      <label>
+        <%= f.email_field :email, placeholder: "Email Address" %>
+      </label>
+    </div>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+<div class="row">
+  <div class="large-6 columns">
+    <label>
+      <%= f.password_field :password, autocomplete: "off", placeholder: "Password - (leave blank if you don't want to change it)" %>
+    </label>
+  </div>
+  <div class="large-6 columns">
+    <label>
+      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Password - (leave blank if you don't want to change it)" %>
+    </label>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-6 columns">
+    <label>
+      <%= f.text_field :first_name, placeholder: "First Name" %>
+    </label>
+  </div>
+  <div class="large-6 columns">
+    <label>
+      <%= f.text_field :last_name, placeholder: "Last Name" %>
+    </label>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-6 columns">
+    <label>
+      <%= f.text_field :address_1, placeholder: "Address line 1" %>
+    </label>
+  </div>
+
+  <div class="large-6 columns">
+    <label>
+      <%= f.text_field :address_2, placeholder: "Address line 2 (Optional)" %>
+    </label>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-6 columns">
+    <label>
+      <%= f.text_field :city, placeholder: "City / Town" %>
+    </label>
+  </div>
+
+  <div class="large-6 columns">
+    <label>
+      <%= f.text_field :postcode, placeholder: "Postcode" %>
+    </label>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-6 columns">
+    <label>
+      <%= f.text_field :country, placeholder: "Country" %>
+    </label>
+  </div>
+
+  <div class="large-6 columns">
+    <label>
+      <%= f.text_field :image, placeholder: "Image (URL)" %>
+    </label>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="large-6 columns large-offset-3">
+    <label>
+      <p class="text-center"><i >(we need your current password to confirm your changes)</i></p>
+      <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current Password" %>
+    </label>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-6 columns large-offset-3">
+    <div class="actions">
+      <%= f.submit "Update", class:"alert button expand" %>
+    </div>
+    <% end %>
+  </div>
+</div><hr>
+
+<div class="row">
+  <div class="large-6 columns large-offset-3">
+    <h3 class="text-center">Cancel my account</h3>
+
+    <p class="text-center">Want to close your account with us? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"alert button expand" %></p>
+
+    <p  class="text-center"><%= link_to "Back", :back %></p>
+  </div>
+</div>

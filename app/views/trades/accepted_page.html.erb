@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h1 class="text-center">Accepted Trade</h1><br>
+
+    <% sender_user = User.find(@trade.sender_id) %>
+    <% receiver_user = User.find(@trade.receiver_id) %>
+    <% sender_item = Item.find(@trade.sender_item_id) %>
+    <% receiver_item = Item.find(@trade.receiver_item_id) %>
+
+
+    <div class="panel">
+      <p class="text-center"><strong><%= sender_user.username %></strong> has
+      accepted the trade with '<em><%= receiver_user.username %></em>'</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <hr>
+  <div class="large-5 small-6 columns">
+    <p class="text-center"><strong><%= receiver_user.username %> Swapped </strong></p>
+    <%=  image_tag receiver_item.image, size: '400' %>
+    <div class="panel">
+      <p class="text-center"><a href="#" data-reveal-id="itemModal-1"><%= receiver_item.name %></a></p>
+    </div>
+  </div>
+  <div class="large-2 columns show-for-large-up">
+    <p class="far-down text-center"><strong><< | >></strong></p>
+  </div>
+  <div class="large-5 small-6 columns">
+    <p class="text-center"><strong><%= sender_user.username %> Swapped</strong></p>
+    <%=  image_tag sender_item.image, size: '400' %>
+    <div class="panel">
+      <p class="text-center"><a href="#" data-reveal-id="itemModal-2"><%= sender_item.name %></a></p>
+    </div>
+  </div>
+  <hr>
+</div>
+
+<div class="row">
+  <div class="large-5 small-6 columns panel">
+    <p class="no-vertical-margin text-center"><%= receiver_user.address_1 %></p>
+    <p class="no-vertical-margin text-center"><%= receiver_user.address_2  if receiver_user.address_2 %></p>
+    <p class="no-vertical-margin text-center"><%= receiver_user.city %></p>
+    <p class="no-vertical-margin text-center"><%= receiver_user.postcode %></p>
+    <p class="no-vertical-margin text-center"><%= receiver_user.country %></p>
+    <br>
+  </div>
+  <div class="large-5 small-6 columns panel">
+    <p class="no-vertical-margin text-center"><%= sender_user.address_1 %></p>
+    <p class="no-vertical-margin text-center"><%= sender_user.address_2  if sender_user.address_2 %></p>
+    <p class="no-vertical-margin text-center"><%= sender_user.city %></p>
+    <p class="no-vertical-margin text-center"><%= sender_user.postcode %></p>
+    <p class="no-vertical-margin text-center"><%= sender_user.country %></p>
+    <br>
+  </div>
+</div>
+
+<div id="itemModal-1" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <div class="row">
+    <div class="large-4 columns">
+      <br>
+      <%= image_tag receiver_item.image, size:'300' %>
+    </div>
+    <div class="large-8 columns">
+      <h2 id="modalTitle"><%= receiver_item.name %></h2>
+      <p class="lead"><%= receiver_item.description %></p>
+      <p class="no-vertical-margin"><strong>Condition: </strong><%= receiver_item.condition %></p>
+      <p class="no-vertical-margin"><strong>Suggested value: </strong><%= number_to_currency(receiver_item.value, unit: "£", precision: 0) %></p>
+      <p class="no-vertical-margin"><strong>Category: </strong><%= receiver_item.category.name.capitalize %></p>
+      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+  </div>
+</div>
+
+<div id="itemModal-2" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <div class="row">
+    <div class="large-4 columns">
+      <br>
+      <%= image_tag sender_item.image, size:'300' %>
+    </div>
+    <div class="large-8 columns">
+      <h2 id="modalTitle"><%= sender_item.name %></h2>
+      <p class="lead"><%= sender_item.description %></p>
+      <p class="no-vertical-margin"><strong>Condition: </strong><%= sender_item.condition %></p>
+      <p class="no-vertical-margin"><strong>Suggested value: </strong><%= number_to_currency(sender_item.value, unit: "£", precision: 0) %></p>
+      <p class="no-vertical-margin"><strong>Category: </strong><%= sender_item.category.name.capitalize %></p>
+      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="contain-to-grid">
+  <nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+      <li class="name">
+        <h1><%= link_to "Carboot", root_path %></h1>
+      </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+      <!-- Left Nav Section -->
+      <ul class="left">
+        <li class="divider"></li>
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Items", items_path %></li>
+        <% if current_user %>
+          <li><%= link_to "Upload", new_item_path %></li>
+        <% end %>
+        <li class="has-dropdown">
+          <a href="#">Categories</a>
+          <ul class="dropdown">
+            <li><%= link_to "Fashion", fashion_path %></li>
+            <li><%= link_to "Home", home_path %></li>
+            <li><%= link_to "Garden", garden_path %></li>
+            <li><%= link_to "Electronics", electronics_path %></li>
+            <li><%= link_to "Entertainment", entertainment_path %></li>
+            <li><%= link_to "Leisure", leisure_path %></li>
+            <li><%= link_to "Collectables", collectables_path %></li>
+            <li><%= link_to "Jewellery", jewellery_path %></li>
+            <li><%= link_to "Motors", motors_path %></li>
+            <li><%= link_to "Literature", literature_path %></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="divider"></li>
+        <li class="has-form hide-for-medium-only">
+          <%= form_tag items_path, :method => 'get'  do %>
+          <div class="row collapse">
+            <div class="large-8 small-8 columns">
+              <%= text_field_tag :search, params[:search]%>
+            </div>
+            <div class="large-4 small-4 columns">
+              <%= submit_tag "Search", :name => nil, class: 'alert button expand'  %>
+              <% end %>
+            </div>
+          </div>
+        </li>
+        <li class="divider"></li>
+        <% if current_user %>
+          <li><%= link_to "My Profile", current_user %></li>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Login", new_user_session_path %></li>
+          <li><%= link_to "Register", new_user_registration_path %></li>
+        <% end %>
+      </ul>
+    </section>
+  </nav>
+ </div>

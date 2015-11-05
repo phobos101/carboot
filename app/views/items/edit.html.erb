@@ -1,0 +1,33 @@
+<% if current_user %>
+  <% if current_user.id == @item.user.id %>
+    <div class="row">
+      <div class="large-12 colums">
+        <h2 class="text-center">Editing Item</h2><br>
+      </div>
+    </div>
+
+    <%= render 'form' %>
+
+    <div class="row">
+      <p class="text-center"><%= link_to 'Show Item', @item %></p>
+    </div>
+  <% else %>
+    <div class="row">
+      <div class="large-12 colums">
+        <h2 class="text-center">Oops! You cannot edit someone elses item.</h2><br>
+      </div>
+    </div>
+    <div class="row">
+      <p class="text-center"><%= link_to 'Show Item', @item %></p>
+    </div>
+  <% end %>
+<% else %>
+<div class="row">
+  <div class="large-12 colums">
+    <h2 class="text-center">Please log in!</h2><br>
+  </div>
+</div>
+<div class="row">
+  <p class="text-center"><%= link_to 'Show Item', @item %></p>
+</div>
+<% end %>

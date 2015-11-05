@@ -1,0 +1,108 @@
+<div class="row">
+  <div class="large-12 colums">
+    <h2 class="text-center">Sign up</h2><br>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-6 columns large-offset-3">
+    <h6 class="panel text-center"><em>All fields are required unless stated otherwise</em></h6><br>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-6 columns">
+      <label>
+        <%= f.text_field :username, autofocus: true, placeholder: "Username" %>
+      </label>
+    </div>
+
+    <div class="large-6 columns">
+      <label>
+        <%= f.email_field :email, placeholder: "Email Address" %>
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-6 columns">
+      <label>
+        <%= f.password_field :password, autocomplete: "off", placeholder: "Password (8 characters minimum)" %>
+      </label>
+    </div>
+    <div class="large-6 columns">
+      <label>
+        <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Password Confirmation" %>
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-6 columns">
+      <label>
+        <%= f.text_field :first_name, placeholder: "First Name" %>
+      </label>
+    </div>
+
+    <div class="large-6 columns">
+      <label>
+        <%= f.text_field :last_name, placeholder: "Last Name" %>
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-6 columns">
+      <label>
+        <%= f.text_field :address_1, placeholder: "Address line 1" %>
+      </label>
+    </div>
+
+    <div class="large-6 columns">
+      <label>
+        <%= f.text_field :address_2, placeholder: "Address Line 2 (Optional)" %>
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-6 columns">
+      <label>
+        <%= f.text_field :city, placeholder: "City / Town" %>
+      </label>
+    </div>
+
+    <div class="large-6 columns">
+      <label>
+        <%= f.text_field :postcode, placeholder: "Postcode" %>
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-6 columns">
+      <label>
+        <%= f.text_field :country, placeholder: "Country" %><br>
+      </label>
+    </div>
+
+    <div class="large-6 columns">
+      <label>
+        <%= f.text_field :image, placeholder: "Image (URL) - Optional" %>
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-6 columns large-offset-3">
+      <div class="actions">
+        <%= f.submit "Sign up", class:"alert button expand" %><br>
+      </div>
+
+      <% end %>
+
+    <p class="text-center"><%= render "devise/shared/links" %></p>
+  </div>
+</div>

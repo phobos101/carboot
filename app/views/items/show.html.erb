@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<% @avaliable = true %>
+<% @avaliable = false if (Trade.where(status: "Accepted", receiver_item_id: @item.id).count > 0) %>
+<% @avaliable = false if (Trade.where(status: "Accepted", sender_item_id: @item.id).count > 0) %>
+
+<div class="row">
+  <hr>
+  <div class="large-6 columns">
+    <%= image_tag @item.image.url, size: '400x500', class:'th fifty-down' %>
+  </div>
+  <div class="large-6 columns">
+    <h3><%= @item.name %></h3>
+    <p class="subheader"><%= @item.description %></p><br>
+
+    <div class="panel">
+      <p><strong>Condition: </strong><%= @item.condition %></p>
+      <p><strong>Suggested value: </strong><%= number_to_currency(@item.value, unit: "£", precision: 0) %></p>
+      <p><strong>Category: </strong><%= @item.category.name.capitalize %></p>
+      <p><strong>Owner: </strong><%= link_to @item.user.username, "/users/#{@item.user.id}"  %></p>
+    </div>
+
+    <% if current_user %>
+      <% if @avaliable %>
+        <% if current_user.id == @item.user.id %>
+          <div class="panel">
+            <h5>Edit your item</h5>
+            <%= link_to 'Edit', edit_item_path(@item), class: 'small button' %>
+          </div>
+        <% else %>
+          <div class="panel">
+            <h5>Want this item?</h5>
+            <h6 class="subheader">Click the button below to submit a trade request.</h6>
+            <%= link_to 'Request Trade', request_trade_item_path(@item), class: 'small button' %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="panel">
+          <h5><strong>Unavaliable</strong></h5>
+          <p>This item has been sucessfully traded.</p>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="panel">
+        <h5>Want this item?</h5>
+        <h6 class="subheader">Please log in to request a trade.</h6>
+        <%= link_to 'Login', new_user_session_path, class: 'small button' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <hr/>
+  <div class="large-6 columns">
+    <h4>Open Trade Requests</h4>
+    <% n = 1 %>
+    <% @item.request_trade.each do |trade| %>
+      <% if trade.status == "Pending" %>
+        <p><%= n %>. <%= User.find(trade.sender_id).username %> opened a trade.
+        <em><%= distance_of_time_in_words(trade.created_at, Time.now) %> ago.</em></p>
+        <% n += 1 %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="large-6 columns">
+    <h4>Open Trade responses</h4>
+    <% x = 1 %>
+    <% @item.response_trade.each do |trade| %>
+      <% if trade.status == "Responded" %>
+        <p><%= x %>. <%= User.find(trade.receiver_id).username %> responded with
+        '<%= Item.find(trade.receiver_item_id).name %>'.
+        <em><%= distance_of_time_in_words(trade.created_at, Time.now) %> ago.</em></p>
+        <% x += 1 %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

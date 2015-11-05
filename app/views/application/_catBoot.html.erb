@@ -1,0 +1,35 @@
+<div class="row">
+  <% @items.each do |item| %>
+    <div class="large-12 columns">
+      <div class="row">
+        <div class="large-3 columns">
+          <%=  link_to (image_tag item.image, size: '200'), item %><br>
+        </div>
+        <div class="large-9 columns">
+          <div>
+            <p><%= link_to item.name, item %></p>
+            <p><%= item.description %></p>
+            <p><strong>Suggested value: </strong><%= number_to_currency(item.value, unit: "£", precision: 0) %></p>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+</div>
+
+<br><hr>
+<div class="pagination-centered">
+  <ul class="pagination">
+    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+    <li class="current"><a href="">1</a></li>
+    <li><a href="">2</a></li>
+    <li><a href="">3</a></li>
+    <li><a href="">4</a></li>
+    <li class="unavailable"><a href="">&hellip;</a></li>
+    <li><a href="">12</a></li>
+    <li><a href="">13</a></li>
+    <li class="arrow"><a href="">&raquo;</a></li>
+  </ul>
+</div>

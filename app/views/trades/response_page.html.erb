@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h1 class="text-center">Responding to Trade</h1><br>
+
+    <% sender_user = User.find(@trade.sender_id) %>
+    <% sender_username = User.find(@trade.sender_id).username %>
+    <% @senders_items = sender_user.items %>
+    <% requested_item = Item.find(@trade.receiver_item_id).name %>
+
+    <div class="panel">
+      <p class="text-center"><strong><%= sender_username %></strong> wants to swap something for your
+      <em><%= requested_item %></em>!</p>
+    </div><br>
+
+    <p class="text-center"><em>Click on an item to see more information, and
+      click the swap button to trade your <%= requested_item %> for the item you
+       want.</em></p><br>
+  </div>
+</div>
+<hr>
+<%= render "respondTradeBoot" %>
+<hr>
+<div class="row">
+  <div class="large-4 columns large-offset-4">
+    <p class="ten-down"><%= link_to "Reject Trade", reject_trade_path(@trade), class: "button expand alert" %></p>
+  </div>
+</div>

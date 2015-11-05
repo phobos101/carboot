@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="large-12 columns">
+    <p id="notice" class="text-center"><%= notice %></p>
+    <h3 class="text-center">Featured Items</h3><hr>
+  </div>
+
+  <% @items.each do |item| %>
+    <div class="large-4 small-6 columns">
+      <%=  link_to (image_tag item.image, size: '300'), item_path(item) %>
+      <div class="panel mobile-tile-item">
+        <p><%= link_to item.name, item_path(item) %></p>
+      </div>
+    </div>
+  <% end %>
+
+  <br><hr>
+
+  <div class="pagination-centered">
+    <ul class="pagination">
+      <li class="arrow unavailable"><a href="">&laquo;</a></li>
+      <li class="current"><a href="">1</a></li>
+      <li><a href="">2</a></li>
+      <li><a href="">3</a></li>
+      <li><a href="">4</a></li>
+      <li class="unavailable"><a href="">&hellip;</a></li>
+      <li><a href="">12</a></li>
+      <li><a href="">13</a></li>
+      <li class="arrow"><a href="">&raquo;</a></li>
+    </ul>
+  </div>
+
+</div>

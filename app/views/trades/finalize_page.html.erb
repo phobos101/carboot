@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h1 class="text-center">Finalizing the Trade</h1><br>
+
+    <% sender_user = User.find(@trade.sender_id) %>
+    <% receiver_user = User.find(@trade.receiver_id) %>
+    <% sender_item = Item.find(@trade.sender_item_id) %>
+    <% receiver_item = Item.find(@trade.receiver_item_id) %>
+
+
+    <div class="panel">
+      <p class="text-center"><strong><%= receiver_user.username %></strong> has
+      responded to your request for thier '<em><%= receiver_item.name %></em>'</p>
+    </div>
+  </div>
+</div>
+
+<% @avaliable = true %>
+<% @avaliable = false if (Trade.where(status: "Accepted", receiver_item_id: receiver_item.id).count > 0) %>
+<% @avaliable = false if (Trade.where(status: "Accepted", sender_item_id: receiver_item.id).count > 0) %>
+<% @avaliable = false if (Trade.where(status: "Accepted", receiver_item_id: sender_item.id).count > 0) %>
+<% @avaliable = false if (Trade.where(status: "Accepted", sender_item_id: sender_item.id).count > 0) %>
+
+<% if @avaliable %>
+<div class="row">
+  <hr>
+  <div class="large-5 small-6 columns">
+    <p class="text-center"><strong>You Want</strong></p>
+    <%=  image_tag receiver_item.image, size: '400' %>
+    <div class="panel">
+      <p class="text-center"><a href="#" data-reveal-id="itemModal-1"><%= receiver_item.name %></a></p>
+    </div>
+  </div>
+  <div class="large-2 columns show-for-large-up">
+    <p class="far-down text-center"><strong>>></strong></p>
+  </div>
+  <div class="large-5 small-6 columns">
+    <p class="text-center"><strong>They Want</strong></p>
+    <%=  image_tag sender_item.image, size: '400' %>
+    <div class="panel">
+      <p class="text-center"><a href="#" data-reveal-id="itemModal-2"><%= sender_item.name %></a></p>
+    </div>
+  </div>
+  <hr>
+</div>
+
+<div class="row">
+  <div class="large-6 small-12 columns">
+    <p><%= link_to "Accept Trade", accept_trade_path(@trade), class: "button expand success" %></p>
+  </div>
+  <div class="large-6 small-12 columns">
+    <p><%= link_to "Reject Trade", reject_trade_path(@trade), class: "button expand alert" %></p>
+  </div>
+</div>
+
+<div id="itemModal-1" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <div class="row">
+    <div class="large-4 columns">
+      <br>
+      <%= image_tag receiver_item.image, size:'300' %>
+    </div>
+    <div class="large-8 columns">
+      <h2 id="modalTitle"><%= receiver_item.name %></h2>
+      <p class="lead"><%= receiver_item.description %></p>
+      <p class="no-vertical-margin"><strong>Condition: </strong><%= receiver_item.condition %></p>
+      <p class="no-vertical-margin"><strong>Suggested value: </strong><%= number_to_currency(receiver_item.value, unit: "£", precision: 0) %></p>
+      <p class="no-vertical-margin"><strong>Category: </strong><%= receiver_item.category.name.capitalize %></p>
+      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+  </div>
+</div>
+
+<div id="itemModal-2" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <div class="row">
+    <div class="large-4 columns">
+      <br>
+      <%= image_tag sender_item.image, size:'300' %>
+    </div>
+    <div class="large-8 columns">
+      <h2 id="modalTitle"><%= sender_item.name %></h2>
+      <p class="lead"><%= sender_item.description %></p>
+      <p class="no-vertical-margin"><strong>Condition: </strong><%= sender_item.condition %></p>
+      <p class="no-vertical-margin"><strong>Suggested value: </strong><%= number_to_currency(sender_item.value, unit: "£", precision: 0) %></p>
+      <p class="no-vertical-margin"><strong>Category: </strong><%= sender_item.category.name.capitalize %></p>
+      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+  </div>
+</div>
+<% else %>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="panel">
+      <h2 class="text-center">Too late!</h2>
+      <h3 class="subheader text-center">One of the items has already been traded.</h3><br>
+      <p><%= link_to "Reject Trade", reject_trade_path(@trade), class: "button expand alert" %></p>
+
+    </div>
+  </div>
+</div>
+
+<% end %>
