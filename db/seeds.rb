@@ -12,9 +12,9 @@ u1 = User.create!(
   password: "password",
   first_name: "Robert",
   last_name: "Wilson",
-  address_1: "8 Epping Way",
+  address_1: "1 The Place",
   city: "London",
-  postcode: "E4 7PB",
+  postcode: "E2 3AB",
   country: "UK",
   image: "rob_user_image.jpg")
 
