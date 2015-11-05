@@ -45,6 +45,11 @@ body {
   height: 300px;
 }
 
+.image-sizer-trades {
+  max-height: 300px;
+  min-height: 170px;
+}
+
 .landing-page-main {
   background: image-url("beach_radio_bg.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
