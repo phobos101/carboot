@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# Use AWS S3
+gem 'aws-sdk'
 # Use foundation for front-end
 gem 'foundation-rails'
 # Use paperclip to allow users to upload item images
